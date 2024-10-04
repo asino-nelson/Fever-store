@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { products } from "../assets/frontend_assets/assets";
 
 export const ShopContext = createContext();
@@ -11,6 +11,12 @@ const ShopContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
 
   const addToCart = async (itemId, size) => {
+
+    if (!size) {
+      alert("Select Product Size")
+      return
+    }
+
     let cartData = structuredClone(cartItems);
 
     if (cartData[itemId]) {
