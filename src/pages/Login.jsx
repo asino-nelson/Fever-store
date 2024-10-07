@@ -1,11 +1,67 @@
-
+import { useState } from "react";
 
 const Login = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  const [currentState, setCurrentState] = useState("Sign Up");
 
-export default Login
+  const onSubmitHandler = async (event) => {
+    event.PpreventDefault();
+  };
+
+  return (
+    <form
+      onSubmit={onSubmitHandler}
+      className="flex flex-col items-center w-[90%] sm:max-w-96 m-auto mt-14 gap-4 text-gray-700 "
+    >
+      <div className="inline-flex items-center gap-2 mb-2 mt-10">
+        <p className="text-3xl">{currentState}</p>
+        <hr className="border-none h-[1.5px] w-4 bg-gray-800" />
+      </div>
+      {currentState === "Login" ? (
+        ""
+      ) : (
+        <input
+          className="border border-gray-800 rounded py-2 px-3 w-full"
+          type="text"
+          placeholder="Name"
+          required
+        />
+      )}
+
+      <input
+        className="border border-gray-800 rounded py-2 px-3 w-full"
+        type="email"
+        placeholder="Email"
+        required
+      />
+      <input
+        className="border border-gray-800 rounded py-2 px-3 w-full"
+        type="password"
+        placeholder="Password"
+        required
+      />
+      <div className="w-full flex justify-between text-sm -mt-2">
+        <p className="cursor-pointer">Forgot your password?</p>
+        {currentState === "Login" ? (
+          <p
+            onClick={() => setCurrentState("Sign Up")}
+            className="cursor-pointer"
+          >
+            Create Account
+          </p>
+        ) : (
+          <p
+            onClick={() => setCurrentState("Login")}
+            className="cursor-pointer"
+          >
+            Login Here
+          </p>
+        )}
+      </div>
+      <button className="bg-black text-white font-semibold py-4 w-full mt-4">
+        {currentState === "Login" ? "Login" : "Sign Up"}
+      </button>
+    </form>
+  );
+};
+
+export default Login;
